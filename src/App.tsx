@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header'
+import FormPage from './components/FormPage';
+import MainPage from './components/MainPage';
+import CartPage from './components/СartPage';
+import Footer from './components/Footer';
 import './App.css';
 
-function App() {
+const App: FC = () => {
   return (
     <>
-      123
+      <Router>
+        <Header/>
+        <div className='content'>
+        <Routes>
+          <Route path='/' element={<MainPage/>}/>
+          <Route path='/form' element={<FormPage/>}/>
+          <Route path='/cart' element={<CartPage/>}/>
+        </Routes>
+        </div>
+        <Footer/>
+      </Router>
     </>
   );
 }
