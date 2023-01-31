@@ -19,7 +19,9 @@ body{
 .content{
   width: 100%;
   min-height: calc(100vh - 130px);
-  background: aliceblue;
+
+  background: linear-gradient(to right, aliceblue 25%, rgb(255, 255, 255) 50%,aliceblue 75%, aliceblue 100%);
+
   padding: 35px;
 }
 

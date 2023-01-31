@@ -3,8 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import '../styles/App.css'
 import Loading from './Loading';
+
+import '../styles/App.css'
 
 const Header: FC = () => {
   const {loading} = useTypedSelector(state => state.countries)
