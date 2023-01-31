@@ -1,19 +1,23 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
-
 import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { UseActions } from "../hooks/useActions";
+
+import Error from "./Error";
 
 import '../styles/Form.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 interface Values {
-    name: string
-    lastName: string
-    age: number
-    sex: string
-    bussinessEmail: string
-    organizationName: string
+    name: string,
+    lastName: string,
+    age: any,
+    sex: string,
+    bussinessEmail: string,
+    organizationName: string,
     password: any,
     confirmPassword: any,
     country: string,
@@ -21,7 +25,19 @@ interface Values {
 }
 
 const FormPage: FC = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const {countries, loading, error} = useTypedSelector(state => state.countries)
+//   console.log(countries, loading, error)
+  const {fetchCountries} = UseActions()
+  const {fetchUsers} = UseActions()
+  useEffect(() => {
+    fetchCountries()
+  }, [])
+
+
+if (error) {
+    return <Error/>
+}
 
 
   const validationsSchema = yup.object().shape({
@@ -64,7 +80,7 @@ const FormPage: FC = () => {
         initialValues={{
           name: "",
           lastName: "",
-          age: 0,
+          age: '',
           sex: "",
           bussinessEmail: "",
           organizationName: "",
@@ -75,7 +91,8 @@ const FormPage: FC = () => {
         }}
         validateOnBlur
         onSubmit={(values: Values) => (
-          navigate("/Cart"),
+            navigate("/Cart"),
+            fetchUsers(values),
           console.log(values)
         )}
         validationSchema={validationsSchema}
@@ -91,10 +108,9 @@ const FormPage: FC = () => {
           dirty,
         }) => (
           <Form className='form'>
-            <h3 className="text-center">Take scoutbees for a spin</h3>
+            <h3 className="text-center">Fill out the customer form please</h3>
             <p className="text-center">
-              Free 14 days triat of the Enterprise edition of the Scoutbees. No
-              credit card required
+                Your personal data is not transferred to outside
             </p>
             <hr />
             {/* name----------------------------------------- */}
@@ -283,10 +299,12 @@ const FormPage: FC = () => {
                 value={values.country}
               >
                 <option value="Russia">Russia</option>
+                {countries.map((country, id) =>
+                    <option key={id}> {country}</option>)}
               </select>
-              {/* {touched.organizationName && errors.organizationName && (
-                <p className={styles.error}>{errors.organizationName}</p>
-              )} */}
+              {touched.organizationName && errors.organizationName && (
+                <p className='error'>{errors.organizationName}</p>
+              )}
             </div>
 
             {/* agreement----------------------------------------- */}
@@ -313,7 +331,7 @@ const FormPage: FC = () => {
               disabled={
                 (!isValid && !dirty && !values.agreement) || !values.agreement
               }
-            //   onClick={handleSubmit}
+            //   onClick={handleSubmit(    )}
               type="submit"
             >
               <span className='label'>Submit</span>
