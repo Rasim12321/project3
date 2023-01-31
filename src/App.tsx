@@ -6,7 +6,7 @@ import FormPage from './components/FormPage';
 import MainPage from './components/MainPage';
 import CartPage from './components/СartPage';
 import Footer from './components/Footer';
-import './App.css';
+import './styles/App.css';
 
 const App: FC = () => {
   return (
