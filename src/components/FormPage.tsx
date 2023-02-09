@@ -11,7 +11,7 @@ import '../styles/Form.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-interface Values {
+export interface Values {
     name: string,
     lastName: string,
     age: any,

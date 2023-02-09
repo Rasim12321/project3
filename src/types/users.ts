@@ -1,5 +1,7 @@
+import { Values } from "../components/FormPage";
+
 export interface UserState {
-    users: any[],
+    users: Values | any,
     loading: boolean,
     error: null | string,
 }

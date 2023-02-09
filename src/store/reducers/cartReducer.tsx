@@ -8,12 +8,31 @@ export const CartReducer = (state: CartSt = initialState, action: CartAction): C
         case CartActionsTypes.GOODS_ADD:
             return [...state, action.payload]
         case CartActionsTypes.GOODS_ADD_COUNT:
-            state[action.payload-1].count += 1
-            return state
+            state.map(item => item.id == action.payload ?
+                (item.count += 1 ):
+                null
+                )
+            return [...state]
         case CartActionsTypes.GOODS_MIN:
-            // return {...state, cart: action.payload}
+            // console.log(action.payload)
+            state.map(item => item.id == action.payload ?
+                (item.count -= 1, console.log(item)) :
+                null
+                )
+            state.map(item => item.id == action.payload ?
+                                // @ts-ignore
+                (item.count === 0 ? state.splice(state.indexOf(item),1) : null) :
+                item)
+            return [...state]
         case CartActionsTypes.GOODS_DEL:
-            // return {...state, cart: action.payload}
+            console.log(action.payload)
+            state.length === 1 ? state = [] :
+            state.map(item => item.id == action.payload ?
+                // @ts-ignore
+                (state.splice(state.indexOf(item),1) , console.log(item) ):
+                item
+                )
+            return [...state]
         default:
             return state
     }

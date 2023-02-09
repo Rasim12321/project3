@@ -1,27 +1,40 @@
-import { FC, useEffect, useState } from "react";
+import React, { DOMElement, FC, SyntheticEvent, useEffect} from "react";
+import { Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { UseActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+
+import '../styles/Cart.css'
 import { CartState } from "../types/cart";
 
-
 const CartPage: FC = () => {
-    const {users} = useTypedSelector(state => state.user)
-    console.log(users)
+    const navigate = useNavigate()
+    // const {users} = useTypedSelector(state => state.user)
+    // console.log(users)
 
     const cart = useTypedSelector(state => state.cart)
-    // const [state, setState] = useState<CartState>(cart)
+    const {CartAddCount} = UseActions()
+    const {CartMinCount} = UseActions()
+    const {CartDel} = UseActions()
+    let m = cart
+    let total:number = 0
+    cart.map((good) => total += good.price*good.count)
+    console.log(cart)
 
-    useEffect(() => {
-        console.log(cart)
 
-    })
 
     return(
         <>
+            {cart.length === 0 ?
+            <Alert className="w-50 m-auto border-dark bg-dark text-center text-white fs-2 shadow-lg p-3 mb-5 bg-body-tertiary rounded" >Корзина пуста!
+            <button className="button fs-5 text-white w-auto bg-dark mt-2 p-2" onClick={() => navigate('/')}>Перейти в магазин</button></Alert> :
+            <>
             <table className="table">
                 <thead>
                     <tr>
                         <th>name</th>
                         <th>img</th>
+                        <th>count</th>
                         <th>price</th>
                     </tr>
                 </thead>
@@ -29,14 +42,28 @@ const CartPage: FC = () => {
                     {cart.map(good => (
                         <tr key={good.id}>
                             <td>{good.name}</td>
-                            <td><img src={good.url} alt="" /></td>
-                            <td>{good.price}</td>
+                            <td><img className="img" src={good.url} alt="" /></td>
+                            <td>{good.count}</td>
+                            <td>{good.price * good.count}</td>
+                            <td className="flex">
+                                <td><button className="buttonCart" value={`${good.id}`} onClick={(e: React.MouseEvent<HTMLButtonElement>) => (console.log(good.id), CartAddCount(+e.currentTarget.value))}><span>+</span></button></td>
+                                <td><button className="buttonCart" value={`${good.id}`} onClick={async (e: React.MouseEvent<HTMLButtonElement>) => await CartMinCount(+e.currentTarget.value)}>-</button></td>
+                                <td><button className="buttonCart" value={`${good.id}`} onClick={(e: React.MouseEvent<HTMLButtonElement>) => CartDel(+e.currentTarget.value)}>X</button></td>
+                            </td>
                         </tr>
                     ))}
-
                 </tbody>
-            </table>
+                <tfoot className="tfoot flex">
+                    <tr className="flex">
+                        <td className="d-block"><b> Total:</b>  </td>
+                        <td className="d-block"><b>{total}</b></td>
+                    </tr>
 
+                </tfoot>
+            </table>
+            <button className="button" onClick={() => navigate('/success')}>Заказать</button>
+            </>
+        }
         </>
     )
 }

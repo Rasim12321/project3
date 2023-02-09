@@ -33,3 +33,9 @@ body{
     box-shadow: 0 0 20px 1px black;
     background-color: aliceblue;
 }
+
+.add{
+    position: absolute;
+    right: 400px;
+    top: 40%;
+}

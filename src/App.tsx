@@ -7,6 +7,7 @@ import MainPage from './components/MainPage';
 import CartPage from './components/СartPage';
 import Footer from './components/Footer';
 import './styles/App.css';
+import SuccessPage from './components/SuccessPage';
 
 const App: FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: FC = () => {
           <Route path='/' element={<MainPage/>}/>
           <Route path='/form' element={<FormPage/>}/>
           <Route path='/cart' element={<CartPage/>}/>
+          <Route path='/success' element={<SuccessPage/>}/>
         </Routes>
         </div>
         <Footer/>

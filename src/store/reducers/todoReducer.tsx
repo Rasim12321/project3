@@ -5,7 +5,7 @@ const initialState: TodoState = {
     goods: Goods,
     loading: false,
     error: null,
-    page: 1,
+    page: 0,
 }
 
 export const TodoReducer = (state: TodoState = initialState, action: TodoAction): TodoState => {
