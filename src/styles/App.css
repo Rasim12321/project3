@@ -8,20 +8,43 @@ body{
   height: 60px;
   padding: 4px;
   border-radius: 50%;
-  background-color: aliceblue;
-
+  background-color: rgb(243, 248, 252);
 }
 
 .header{
   height: 80px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+
+.nav :only-child{
+  color: rgba(216, 215, 215, 0.85);
+  text-decoration: underline black;
+  margin: 10px;
+}
+.nav ::after{
+  color: rgba(131, 130, 130, 0.85);
+  text-decoration:  none(255, 0, 0, 0);
+  margin: 10px;
+}
+
+.nav :hover{
+  color: rgba(165, 164, 164, 0.85);
+
+}
+
+.fixed{
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .content{
   width: 100%;
   min-height: calc(100vh - 130px);
-
   background: linear-gradient(to right, aliceblue 25%, rgb(255, 255, 255) 50%,aliceblue 75%, aliceblue 100%);
-
+  margin-top: 60px;
   padding: 35px;
 }
 
@@ -29,6 +52,9 @@ body{
   background-color: dark;
   height: 50px;
   padding: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .flex{

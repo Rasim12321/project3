@@ -6,7 +6,7 @@ export const CartAdd = (goods:CartState) => {
     return (dispatch: Dispatch<CartAction> ) => {
         console.log(goods.id)
         const good = {
-            id: goods.id-1,
+            id: goods.id,
             name: goods.name,
             price: goods.price,
             url: goods.url,

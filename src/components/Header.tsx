@@ -6,14 +6,16 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import Loading from './Loading';
 
 import '../styles/App.css'
+import { NavLink } from 'react-router-dom';
 
 const Header: FC = () => {
   const {loading} = useTypedSelector(state => state.countries)
 
   return (
     <>
+    <div className='fixed'>
       <Navbar className="header" bg="dark" variant="dark">
-        <Container>
+        <Container >
           <Navbar.Brand href="#home"><h2>CONNECT STORE</h2></Navbar.Brand>
 
           <div className='apple'>
@@ -26,14 +28,15 @@ const Header: FC = () => {
           }
           </div>
 
-          <Nav className="">
-            <Nav.Link href="/"><h4>Main</h4></Nav.Link>
-            <Nav.Link href="/form"><h4>Form</h4></Nav.Link>
-            <Nav.Link href="/cart"><h4>Cart</h4></Nav.Link>
+          <Nav className="nav">
+            <NavLink to="/"><h4>Main</h4></NavLink>
+            <NavLink to="/form"><h4>Form</h4></NavLink>
+            <NavLink to="/cart"><h4>Cart</h4></NavLink>
           </Nav>
+
         </Container>
       </Navbar>
-
+    </div>
     </>
   );
 }

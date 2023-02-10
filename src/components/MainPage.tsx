@@ -4,8 +4,10 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 import Description from "./Description";
 import '../styles/Main.css'
+import { useNavigate } from "react-router-dom";
 
 const MainPage: FC = () => {
+    const navigate = useNavigate()
     const {page, goods} = useTypedSelector(state => state.todos)
     const pages = [0,1,2,3,4]
     const [description, setDescription] = useState<boolean>(false)
@@ -23,7 +25,7 @@ const MainPage: FC = () => {
         console.log(arr, num)
 
             // @ts-ignore
-        if (!Array.from(arr).includes(goods[num].id-1)){
+        if (!Array.from(arr).includes(goods[num].id)){
             // console.log(arr)
             // @ts-ignore
             CartAdd(goods[num])
@@ -51,11 +53,13 @@ const MainPage: FC = () => {
                             {/* <button className="button" id={`${page}`} onClick={() => setDescription(prev=>!prev)}>description</button> */}
                         </div>
                     </div>
-                    <button className="button add" id={`${page}`} onClick={addHandler}>add
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="m-1 bi bi-cart" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                    </svg>
-                    </button>
+                    <div>
+                        <button className="button add" id={`${page}`} onClick={addHandler}>add
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="m-1 bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        </button>
+                        </div>
                     </div>
                     <Description/>
 
@@ -63,7 +67,7 @@ const MainPage: FC = () => {
 
                     <div  style={{display: 'flex'}}>
                         {pages.map(p =>
-                            <div key={p-1} className='pages' onClick={() =>  (setTodoPage(p), setDescription(false))} style={{border:p === page ? '6px solid aliceblue' : '2px solid aliceblue', padding: 10}}>
+                            <div key={p} className='pages' onClick={() =>  (setTodoPage(p), setDescription(false))} style={{border:p === page ? '6px solid aliceblue' : '2px solid aliceblue', padding: 10}}>
                                 {p+1}
                             </div>)}
                     </div>

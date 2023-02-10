@@ -27,7 +27,6 @@ body{
 }
 
 .description{
-    /* border: 1px black solid; */
     margin: 50px auto;
     padding: 10px;
     box-shadow: 0 0 20px 1px black;
@@ -35,7 +34,9 @@ body{
 }
 
 .add{
-    position: absolute;
-    right: 400px;
-    top: 40%;
+    display: block;
+    width: 90px;
+    height: 45px;
+    margin: 200px 20px;
+
 }

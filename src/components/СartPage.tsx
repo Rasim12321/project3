@@ -1,18 +1,18 @@
-import React, { DOMElement, FC, SyntheticEvent, useEffect} from "react";
+import React, {FC} from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { UseActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 import '../styles/Cart.css'
-import { CartState } from "../types/cart";
 
 const CartPage: FC = () => {
     const navigate = useNavigate()
     // const {users} = useTypedSelector(state => state.user)
-    // console.log(users)
 
     const cart = useTypedSelector(state => state.cart)
+    console.log(cart)
+
     const {CartAddCount} = UseActions()
     const {CartMinCount} = UseActions()
     const {CartDel} = UseActions()

@@ -45,8 +45,8 @@ require("../styles/Cart.css");
 var CartPage = function () {
     var navigate = react_router_dom_1.useNavigate();
     // const {users} = useTypedSelector(state => state.user)
-    // console.log(users)
     var cart = useTypedSelector_1.useTypedSelector(function (state) { return state.cart; });
+    console.log(cart);
     var CartAddCount = useActions_1.UseActions().CartAddCount;
     var CartMinCount = useActions_1.UseActions().CartMinCount;
     var CartDel = useActions_1.UseActions().CartDel;
